@@ -1,0 +1,61 @@
+/* Reset */
+
+* {box-sizing:border-box; padding: 0; margin: 0;}
+/* ::before,::after {box-sizing:inherit;} */
+ 
+input, select, textarea, button {
+	font-family: inherit;
+	color: currentColor;
+}
+
+html, body {
+	margin: 0;
+	font-size: 62.5%;
+    background-color: #333;
+    height: 100%;
+}
+
+body {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+button {
+    border:0;
+	background: transparent;
+	-webkit-appearance: none;
+}
+
+button:focus {
+    outline: 0;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+}
+
+svg {
+	fill: currentcolor;
+}
+
+/* Canvas */
+
+.board {
+    background-color: #000;
+	position: relative;
+}
+
+.board-box::after {
+	position: absolute;
+	top: 0;
+	left: 0;
+	background: repeating-linear-gradient(to right, transparent 0  calc(50px - 2px), #fff calc(50px - 2px) 50px),
+				repeating-linear-gradient(to bottom, transparent 0 calc(50px - 2px), #fff calc(50px - 2px) 50px) red;
+}
