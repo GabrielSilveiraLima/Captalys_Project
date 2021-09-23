@@ -1,54 +1,107 @@
-let canvas = document.querySelector('.board');
-let pencil = canvas.getContext('2d');
-pencil.fillStyle = "red";
-boxsize = 20;
+$(document).ready(function(){
+    let canvas = $('.board');
+    const rndInt = Math.floor(Math.random() * 875) + 1
 
-var bw = 500;
-var bh = 500;
+    function drawBoard(){
+        let x = 1; 
+        while (x < 876) {
+            canvas.append(`<div class="board__cell board__cell--`+ x +`" data-life="0"></div>`);
+            x++;
+        }
 
-function drawBoard(){
-    for (var x = 0; x <= bw; x += 20) {
-        pencil.moveTo(0.5 + x, 0);
-        pencil.lineTo(0.5 + x, bh);
-    }
+        $('.board__cell--'+ rndInt).addClass('board__cell--active')
+        $('.board__cell--'+ rndInt).next().addClass('board__cell--active')
+        $('.board__cell--'+ rndInt).prev().addClass('board__cell--active')
+        $('.board__cell--'+ rndInt).prevAll().eq(35).addClass('board__cell--active')
+        $('.board__cell--'+ rndInt).nextAll().eq(35).addClass('board__cell--active')
+    };
 
-    for (var x = 0; x <= bh; x += 20) {
-        pencil.moveTo(0, 0.5 + x);
-        pencil.lineTo(bw, 0.5 + x);
-    }
-    pencil.strokeStyle = "white";
-    pencil.stroke();
-}
+    drawBoard();
 
-drawBoard();
-
-// Coordenadas mouse
-let cordX, cordY
-
-function mousePosition() {
+    // active cell
+    let cell = $('.board__cell');
     
-    let move = function() {
-        canvas.addEventListener('mousemove', function(e) {
-            cordX = e.offsetX;
-            cordY = e.offsetY;
-        })
-
-        drawClick()
+    cell.on('click', function() {
+        $(this).toggleClass('board__cell--active');
+        findDots();
+    })
+    
+    function resetBoard() {
+        cell.removeClass('board__cell--active');
+        
     }
 
-    canvas.addEventListener('mouseover', function() {
-        move();
-    })
+    let life = 0;
 
-    canvas.addEventListener('mouseleave', function() {
-        window.removeEventListener('mousemove', move())
-    })
-}
+    function nextDots() {
+        if($('.board__cell--active').next().is('.board__cell--active')){
+            $(this).data('life') == 1
+        }
+    }
 
-mousePosition()
+    function prevDots() {
+        if($('.board__cell--active').prev().is('.board__cell--active')){
+            $(this).data('life') == 1
+        }
+    }
 
-function drawClick() {
-    canvas.addEventListener('click', function() {
-        pencil.fillRect(cordX, cordY, boxsize, boxsize);
-    })
-}
+    function aboveDots() {
+        if($('.board__cell--active').prevAll().eq(35).is('.board__cell--active')){
+            $(this).data('life') == 1
+        }
+    }
+
+    function belowDots() {
+        if($('.board__cell--active').nextAll().eq(35).is('.board__cell--active')){
+            $(this).data('life') == 1
+        }
+    }
+
+    function aboveLeftDots() {
+        if($('.board__cell--active').prevAll().eq(36).is('.board__cell--active')){
+            $(this).data('life') == 1
+        }
+    }
+
+    function aboveRightDots() {
+        if($('.board__cell--active').prevAll().eq(34).is('.board__cell--active')){
+            $(this).data('life') == 1
+        }
+    }
+
+    function belowLeftDots() {
+        if($('.board__cell--active').nextAll().eq(34).is('.board__cell--active')){
+            $(this).data('life') == 1
+        }
+    }
+
+    function belowRightDots() {
+        if($('.board__cell--active').nextAll().eq(36).is('.board__cell--active')){
+            $(this).data('life') == 1
+        }
+    }
+    
+    function findDots() {
+        nextDots();
+        prevDots();
+        aboveDots();
+        aboveLeftDots();
+        aboveRightDots();
+        belowDots();
+        belowLeftDots();
+        belowRightDots();
+        rules();
+    }
+
+    function rules() {
+        // less than 2 neighbours die
+        if(life <= 1){
+
+        }
+    }
+    
+    // Buttons
+    
+    // reset
+    $('.board__controls-reset').on('click', resetBoard);
+})

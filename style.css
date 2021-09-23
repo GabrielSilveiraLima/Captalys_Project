@@ -11,14 +11,18 @@ input, select, textarea, button {
 html, body {
 	margin: 0;
 	font-size: 62.5%;
-    background-color: #333;
+    background-color: #222;
     height: 100%;
 }
 
 body {
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	font-family: 'Stick No Bills', sans-serif;
+	background: rgb(80,174,235);
+	background: radial-gradient(circle, rgba(80,174,235,1) 0%, rgba(62,137,202,1) 100%);
 }
 
 button {
@@ -45,17 +49,67 @@ svg {
 	fill: currentcolor;
 }
 
-/* Canvas */
 
-.board {
-    background-color: #000;
-	position: relative;
+header h2 {
+	color: #fff;
+	font-size: 50px;
+	text-transform: uppercase;
+	margin-bottom: 50px;
 }
 
-.board-box::after {
-	position: absolute;
-	top: 0;
-	left: 0;
-	background: repeating-linear-gradient(to right, transparent 0  calc(50px - 2px), #fff calc(50px - 2px) 50px),
-				repeating-linear-gradient(to bottom, transparent 0 calc(50px - 2px), #fff calc(50px - 2px) 50px) red;
+.board {
+    background-color: rgba(255, 255, 255, 0.6);
+    position: relative;
+    width: 700px;
+    height: 500px;
+    display: flex;
+    flex-wrap: wrap;
+    -webkit-box-shadow: 0px 0px 41px -16px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 41px -16px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 41px -16px rgba(0,0,0,0.75);
+	border-radius: 15px;
+}
+
+.board__cell {
+	width: 20px;
+	height: 20px;
+	display: block;
+    border: .5px solid #555;
+	cursor: pointer;
+}
+
+.board__cell:nth-of-type(35) {
+	border-radius: 0 15px 0 0;
+}
+
+.board__cell:first-of-type {
+	border-radius: 15px 0 0 0;
+}
+
+.board__cell:nth-of-type(841) {
+	border-radius: 0 0 0 15px;
+}
+
+.board__cell:last-of-type {
+	border-radius: 0 0 15px 0;
+}
+
+.board__cell--active {
+	background-color: rgb(28, 9, 117);
+}
+
+.board__controls {
+	margin-top: 40px;
+	display: flex;
+	justify-content: center;
+}
+
+.board__controls-reset {
+	background-color: #777;
+	border: #222;
+	padding: 10px 20px;
+	color: #fff;
+	text-transform: uppercase;
+    cursor: pointer;
+    font-size: 20px;
 }

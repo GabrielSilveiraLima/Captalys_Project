@@ -6,12 +6,28 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Jogo da Vida</title>
         <link rel="stylesheet" href="style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Stick+No+Bills:wght@400;700&display=swap" rel="stylesheet">
     </head>
     <body>
-        <div class="board-box">
-            <canvas id="board" class="board" width="501" height="501"></canvas>
-        </div>
-        
+        <header>
+            <h2>Jogo da Vida</h2>
+        </header>
+        <main>
+            <div class="board-box">
+                <section id="board" class="board" width="700" height="500">
+    
+                </section>
+                <div class="board__controls">
+                    <button class="board__controls-reset">Reset</button>
+                </div>
+            </div>
+        </main>
+        <footer>
+
+        </footer>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="script.js"></script>
     </body>
 </html>
